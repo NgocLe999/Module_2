@@ -29,11 +29,11 @@ public class StudentRepository {
 
     public void save(Student s) {
         students.add(s);
-
         IOFile.writeFile(students, false);
     }
 
     public Student findStudent(int id) {
+        List<Student> students = getAll();
         for (Student student : students) {
             if (id == student.getCode()) {
                 return student;
@@ -49,6 +49,9 @@ public class StudentRepository {
         }
         System.out.println("Đã xóa thành công student có id: " + id + " và có tên là : " + student.getName());
         students.removeIf(s -> id == s.getCode());
+
+        IOFile.writeFile(students, false);
+
     }
 
     public void updateStudent(int id, StudentDTO studentDto) {
@@ -60,5 +63,9 @@ public class StudentRepository {
         student.setAddress(studentDto.getAddress());
         student.setPoint(studentDto.getPoint());
         student.setClassName(studentDto.getClassName());
+
+        List<Student> students = getAll();
+        IOFile.writeFile(students, false);
     }
+
 }
