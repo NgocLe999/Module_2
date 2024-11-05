@@ -85,17 +85,18 @@ public class MainView {
 //        CustomException exceptionHandler = new CustomException();
         StudentController studentController = new StudentController();
         Scanner scanner = new Scanner(System.in);
+        boolean isExistCode = true;
         int code = 0;
-        while (true) {
+        while (isExistCode) {
             try {
                 System.out.print("Mời bạn nhập code: ");
                 code = Integer.parseInt(scanner.nextLine());
                 Student student = studentController.getStudentById(code);
                 if (student == null) {
+                    isExistCode = false;
                     break;
                 } else {
                     System.out.println("Code đã tồn tại, vui lòng chọn lại! ");
-                    menuStudent();
                 }
             } catch (NumberFormatException e) {
                 CustomException.numberFormatException(e);
